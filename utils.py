@@ -69,3 +69,20 @@ def chebyshev_dist(point1, point2):
     assert point1.shape[0] == point2.shape[0]
     sum_abs = np.absolute(point1-point2)
     return sum_abs.max()
+
+class Scaler:
+    def fit(self, data):
+        self.mean = np.mean(data)
+        sum_sq = ((data-self.mean)**2).sum()
+        self.N = len(data)
+        self.std_dev = np.sqrt(sum_sq/self.N)
+    
+    def fit_std(self, data):
+        self.fit(data)
+        return self.standardize(data)
+    
+    def standardize(self, data):
+        return (data - self.mean)/self.std_dev
+    
+    def revert(self, data_std):
+        return data_std*self.std_dev+self.mean
