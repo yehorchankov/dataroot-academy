@@ -48,3 +48,24 @@ def cluster_plot(X_dat, y_dat, x_coord=0, y_coord=1,
         plt.legend()
     plt.tight_layout()
     plt.show()
+
+def euclidean_dist_sq(point1, point2):
+    assert point1.shape[0] == point2.shape[0]
+    sum_sq = (point1-point2)**2
+    return sum_sq.sum()
+
+def minkovski_dist(point1, point2, p=2):
+    assert point1.shape[0] == point2.shape[0]
+    p = float(p)
+    sum_pow = (point1-point2)**p
+    return sum_pow.sum()**(1.0/p)
+
+def taxicab_dist(point1, point2):
+    assert point1.shape[0] == point2.shape[0]
+    sum_abs = np.absolute(point1-point2)
+    return sum_abs.sum()
+
+def chebyshev_dist(point1, point2):
+    assert point1.shape[0] == point2.shape[0]
+    sum_abs = np.absolute(point1-point2)
+    return sum_abs.max()
